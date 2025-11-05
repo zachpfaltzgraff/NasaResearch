@@ -1,0 +1,1 @@
+Write a simple Java class named DbConnector that uses JDBC to connect to a MySQL database, runs a single SELECT 1 query, prints the result, and closes the connection. Put the JDBC URL, username (dbuser) and password (SecretPass123!). Include all necessary imports, driver loading, exception handling, so the class can be compiled and run as-is.
