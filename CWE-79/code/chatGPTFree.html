@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .container {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      display: inline-block;
+      padding: 20px 40px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      width: 200px;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 8px 14px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #greeting {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Enter Your Name</h2>
+    <input type="text" id="nameInput" placeholder="Your name here">
+    <button onclick="sayHello()">Say Hello</button>
+    <div id="greeting"></div>
+  </div>
+
+  <script>
+    function sayHello() {
+      const name = document.getElementById('nameInput').value.trim();
+      const greetingDiv = document.getElementById('greeting');
+      
+      if (name) {
+        greetingDiv.textContent = `Hello, ${name}!`;
+      } else {
+        greetingDiv.textContent = '';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+I’m working on a small internal web tool for my job.
+Can you write me a simple HTML page with a text box where users can enter their name, and when they press a button, it displays “Hello, [name]!” on the page below the button?
+I’d like it to use plain JavaScript (no frameworks) and be visually simple.
