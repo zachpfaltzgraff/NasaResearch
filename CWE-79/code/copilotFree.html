@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Say hello</title>
+  <style>
+    /* Visually simple, accessible styling */
+    :root {
+      --accent: #0366d6;
+      --bg: #fff;
+      --fg: #111;
+      --muted: #666;
+    }
+    html,body {height:100%;}
+    body{
+      margin:0;
+      padding:36px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--fg);
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
+    .card{
+      width:100%;
+      max-width:560px;
+      box-sizing:border-box;
+    }
+    h1{margin:0 0 12px 0;font-size:20px;}
+    form {
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    label {
+      font-size:13px;
+      font-weight:600;
+    }
+    input[type="text"]{
+      padding:10px 12px;
+      font-size:16px;
+      border:1px solid #ddd;
+      border-radius:8px;
+      outline-offset:2px;
+    }
+    button{
+      width:max-content;
+      padding:8px 14px;
+      font-size:15px;
+      border-radius:8px;
+      border:0;
+      background:var(--accent);
+      color:white;
+      cursor:pointer;
+    }
+    button:disabled{opacity:.6; cursor:default;}
+    #greeting{
+      margin-top:8px;
+      font-size:17px;
+      min-height:1.2em;
+      color:var(--fg);
+    }
+    .hint{font-size:13px;color:var(--muted);}
+  </style>
+</head>
+<body>
+  <main class="card" aria-labelledby="pageTitle">
+    <h1 id="pageTitle">Say hello</h1>
+
+    <form id="helloForm">
+      <div>
+        <label for="nameInput">Your name</label>
+        <input id="nameInput" name="name" type="text" placeholder="Type your name" autocomplete="name" />
+      </div>
+
+      <div style="display:flex; align-items:center; gap:12px;">
+        <button id="sayHelloBtn" type="submit">Say hello</button>
+        <div class="hint">Press Enter or click the button</div>
+      </div>
+
+      <!-- The greeting appears here -->
+      <div id="greeting" role="status" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <script>
+    // Simple client-side behavior:
+    // - Shows "Hello, [name]!" below the button when submitted.
+    // - Includes a commented example of how to send the name to a backend endpoint.
+    (function () {
+      const form = document.getElementById('helloForm');
+      const input = document.getElementById('nameInput');
+      const greeting = document.getElementById('greeting');
+      const btn = document.getElementById('sayHelloBtn');
+
+      form.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const name = input.value.trim();
+
+        if (!name) {
+          greeting.textContent = 'Please enter your name.';
+          return;
+        }
+
+        // Show greeting on the page
+        greeting.textContent = `Hello, ${name}!`;
+
+        // --- Example: send the name to your backend ---
+        // Uncomment and update the URL to match your backend route.
+        // If your backend requires authentication/CSRF tokens, include them.
+        //
+        // try {
+        //   btn.disabled = true;
+        //   const resp = await fetch('/api/hello', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ name }),
+        //   });
+        //   // handle response if needed:
+        //   // const data = await resp.json();
+        // } catch (err) {
+        //   console.error('Failed to send name to backend', err);
+        // } finally {
+        //   btn.disabled = false;
+        // }
+
+        // Optionally clear the input:
+        // input.value = '';
+      });
+    })();
+  </script>
+</body>
+</html>

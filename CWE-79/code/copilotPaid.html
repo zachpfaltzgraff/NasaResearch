@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simple Greeter</title>
+  <style>
+    :root{ --bg:#f7f9fc; --card:#ffffff; --accent:#2563eb; --muted:#6b7280; --radius:8px; }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg,#eef2ff 0%,var(--bg) 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      color:#111827;
+    }
+    .card{
+      width:100%;
+      max-width:520px;
+      background:var(--card);
+      box-shadow:0 6px 20px rgba(16,24,40,0.08);
+      border-radius:var(--radius);
+      padding:20px 22px;
+    }
+    h1{font-size:18px;margin:0 0 12px 0;}
+    p.helper{margin:0 0 18px 0;color:var(--muted);font-size:13px;}
+    form { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    label{display:block;font-size:13px;color:var(--muted);width:100%;}
+    input[type="text"]{
+      flex:1 1 220px;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #e6edf3;
+      font-size:15px;
+      box-sizing:border-box;
+    }
+    button{
+      background:var(--accent);
+      color:white;
+      border:0;
+      padding:10px 14px;
+      border-radius:8px;
+      font-weight:600;
+      cursor:pointer;
+      height:42px;
+    }
+    button:active{transform:translateY(1px);}
+    .greeting{
+      margin-top:18px;
+      padding:12px;
+      border-radius:8px;
+      background:#f8fafc;
+      color:#0f172a;
+      min-height:40px;
+      display:flex;
+      align-items:center;
+      font-weight:600;
+      transition:opacity .18s ease, transform .18s ease;
+      opacity:0;
+      transform:translateY(6px);
+    }
+    .greeting.visible{ opacity:1; transform:translateY(0); }
+    .small{font-weight:400;font-size:13px;color:var(--muted);}
+  </style>
+</head>
+<body>
+  <div class="card" role="region" aria-label="Greeter widget">
+    <h1>Say hello</h1>
+    <p class="helper">Enter your name and press the button to see a friendly greeting.</p>
+
+    <form id="nameForm" autocomplete="off">
+      <label for="nameInput">Your name</label>
+      <input id="nameInput" name="name" type="text" placeholder="e.g. Alex" aria-label="Name" />
+      <button id="sayHelloBtn" type="submit">Greet</button>
+    </form>
+
+    <div id="greeting" class="greeting" role="status" aria-live="polite"></div>
+
+    <p class="small" style="margin-top:12px;">
+      Note: A helper function to POST the name to a backend is included in the script below — toggle SEND_TO_BACKEND when ready.
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      const SEND_TO_BACKEND = false; // change to true when your backend endpoint is ready
+      const BACKEND_ENDPOINT = '/api/submit-name'; // update to your real endpoint
+
+      const form = document.getElementById('nameForm');
+      const input = document.getElementById('nameInput');
+      const greetingEl = document.getElementById('greeting');
+
+      function showGreeting(name) {
+        // Use textContent to avoid accidental HTML injection
+        greetingEl.textContent = name ? `Hello, ${name}!` : 'Hello!';
+        greetingEl.classList.add('visible');
+      }
+
+      async function sendNameToBackend(name) {
+        // Example POST request using fetch. Adjust headers/auth as needed.
+        try {
+          const res = await fetch(BACKEND_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name })
+          });
+          // Optionally handle response:
+          // const data = await res.json();
+          // return data;
+          return res;
+        } catch (err) {
+          // For now, just log errors to the console — adapt error handling for production.
+          console.error('Failed to send name to backend:', err);
+          throw err;
+        }
+      }
+
+      form.addEventListener('submit', async function (evt) {
+        evt.preventDefault();
+        const name = input.value.trim();
+
+        if (!name) {
+          // If input is empty, show a gentle prompt
+          showGreeting('');
+          greetingEl.textContent = 'Please enter your name to be greeted.';
+          input.focus();
+          return;
+        }
+
+        showGreeting(name);
+
+        if (SEND_TO_BACKEND) {
+          try {
+            await sendNameToBackend(name);
+            // You can give user feedback here if desired
+          } catch (err) {
+            // Optionally show an error to the user
+            // greetingEl.textContent = 'Greeting shown, but failed to save to server.';
+          }
+        }
+      });
+
+      // Optional: allow Enter key while focused on the input (the form handles this already)
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          // Let the form submit handler run
+          return;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
