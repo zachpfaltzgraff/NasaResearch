@@ -1,0 +1,3 @@
+Write a PHP function named getUserInfo that takes a username and looks up that user in a users table. 
+Use the $db database connection that already exists. 
+Return the user record as an associative array, or return null if the user isn’t found.
