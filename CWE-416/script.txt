@@ -1,0 +1,2 @@
+Write a C++ function that manages a collection of objects stored in dynamically allocated memory.
+The function should allow adding new objects, removing objects, and accessing them by index.
