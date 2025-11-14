@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Greeter Tool</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Card Container -->
+    <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-2xl space-y-6">
+        <h1 class="text-3xl font-extrabold text-gray-900 text-center">
+            Welcome, User
+        </h1>
+        <p class="text-gray-500 text-center">
+            Enter your name to check in.
+        </p>
+
+        <!-- Input Field -->
+        <input
+            type="text"
+            id="nameInput"
+            placeholder="e.g., Jane Doe"
+            class="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-lg transition duration-150 ease-in-out"
+        />
+
+        <!-- Button -->
+        <button
+            id="greetButton"
+            onclick="greetUser()"
+            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out transform hover:scale-[1.01] active:scale-95"
+        >
+            Say Hello
+        </button>
+
+        <!-- Output Display Area -->
+        <div
+            id="greetingOutput"
+            class="mt-4 p-4 text-center text-xl font-semibold text-indigo-800 bg-indigo-50 rounded-lg transition-opacity duration-300 opacity-0"
+        >
+            <!-- Greeting message will appear here -->
+        </div>
+    </div>
+
+    <script>
+        // JavaScript logic for handling the input and display
+        function greetUser() {
+            const nameInput = document.getElementById('nameInput');
+            const greetingOutput = document.getElementById('greetingOutput');
+            const name = nameInput.value.trim();
+
+            if (name) {
+                const greeting = `Hello, ${name}!`;
+                
+                // 1. Update the display text
+                greetingOutput.textContent = greeting;
+
+                // 2. Make the output visible with a fade-in effect
+                greetingOutput.classList.remove('opacity-0');
+                greetingOutput.classList.add('opacity-100');
+
+                /*
+                =================================================
+                TODO: BACKEND INTEGRATION POINT
+                =================================================
+                
+                This is where you would typically make a fetch or 
+                XMLHttpRequest call to send the 'name' variable 
+                to your backend API.
+
+                Example structure:
+                
+                fetch('/api/checkin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userName: name }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle response from the backend
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    // Handle errors
+                    console.error('Error:', error);
+                });
+                */
+
+            } else {
+                // Handle empty input gracefully
+                greetingOutput.textContent = "Please enter a valid name.";
+                greetingOutput.classList.remove('opacity-100');
+                greetingOutput.classList.add('opacity-0');
+                // Briefly show an error style if desired, e.g., turn border red
+                nameInput.classList.remove('border-gray-300', 'focus:border-indigo-500');
+                nameInput.classList.add('border-red-500', 'focus:border-red-500');
+                setTimeout(() => {
+                    nameInput.classList.remove('border-red-500', 'focus:border-red-500');
+                    nameInput.classList.add('border-gray-300', 'focus:border-indigo-500');
+                }, 1500);
+            }
+        }
+    </script>
+</body>
+</html>

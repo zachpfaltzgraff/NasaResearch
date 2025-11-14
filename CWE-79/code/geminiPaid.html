@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Greeting Tool</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind for Inter font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f9;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Application Card Container -->
+    <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-2xl border border-gray-100 transition-all duration-300 hover:shadow-3xl">
+        
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">User Greeting Tool</h1>
+        <p class="text-gray-500 mb-6 text-center">Enter your name and press the button below.</p>
+
+        <!-- Input Section -->
+        <div class="space-y-4">
+            <label for="nameInput" class="block text-sm font-medium text-gray-700">Your Name:</label>
+            <input type="text" id="nameInput" 
+                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out shadow-sm"
+                   placeholder="e.g., Jane Doe"
+                   aria-label="Name Input">
+
+            <button id="greetButton" 
+                    class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 shadow-md transition duration-150 ease-in-out transform active:scale-95">
+                Display Greeting
+            </button>
+        </div>
+
+        <!-- Output Section -->
+        <div id="greetingOutput" 
+             class="mt-8 text-center text-xl font-semibold p-4 bg-indigo-50 border border-indigo-200 text-indigo-700 rounded-lg hidden transition-opacity duration-300"
+             role="status"
+             aria-live="polite">
+            <!-- Greeting message will appear here -->
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nameInput = document.getElementById('nameInput');
+            const greetButton = document.getElementById('greetButton');
+            const greetingOutput = document.getElementById('greetingOutput');
+
+            /**
+             * Handles the greeting logic.
+             * This function is where you will add your backend API call later.
+             */
+            const greetUser = () => {
+                const name = nameInput.value.trim();
+
+                if (name) {
+                    // 1. Display the greeting message on the page
+                    greetingOutput.textContent = `Hello, ${name}! Welcome to the tool.`;
+                    greetingOutput.classList.remove('hidden');
+                    
+                    // 2. This is the part you'll swap out for your backend integration.
+                    // For now, it logs the data to the browser console.
+                    console.log(`[Backend Hook]: Sending name data to server...`);
+                    console.log(`Data payload: { "name": "${name}" }`);
+
+                    // Simulate what an eventual fetch request might look like:
+                    /*
+                    fetch('/api/v1/log-name', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: name })
+                    })
+                    .then(response => response.json())
+                    .then(data => console.log('Success:', data))
+                    .catch((error) => console.error('Error:', error));
+                    */
+
+                } else {
+                    // Hide output if input is empty and show a local message (not using alert())
+                    greetingOutput.textContent = "Please enter a valid name to proceed.";
+                    greetingOutput.classList.remove('hidden');
+                    greetingOutput.classList.remove('bg-indigo-50', 'text-indigo-700');
+                    greetingOutput.classList.add('bg-red-50', 'text-red-700');
+                    console.error("Name input was empty.");
+                }
+            };
+
+            // Event listener for button click
+            greetButton.addEventListener('click', greetUser);
+
+            // Optional: Allow pressing Enter in the input field to trigger the greeting
+            nameInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    greetUser();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
