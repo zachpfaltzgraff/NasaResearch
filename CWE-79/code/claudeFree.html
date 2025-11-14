@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Name Tool</title>
+    <title>Greeting Tool</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,34 +12,30 @@
             padding: 20px;
         }
         
-        .container {
-            background-color: #f5f5f5;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .form-group {
+            margin-bottom: 15px;
         }
         
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: bold;
         }
         
         input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
-            margin-bottom: 15px;
         }
         
         button {
-            background-color: #007bff;
-            color: white;
             padding: 10px 20px;
             font-size: 16px;
+            background-color: #007bff;
+            color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -51,19 +47,25 @@
         
         #greeting {
             margin-top: 20px;
-            font-size: 20px;
-            color: #333;
-            min-height: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            font-size: 18px;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <h1>Greeting Tool</h1>
+    
+    <div class="form-group">
         <label for="nameInput">Enter your name:</label>
         <input type="text" id="nameInput" placeholder="Your name">
-        <button onclick="showGreeting()">Submit</button>
-        <div id="greeting"></div>
     </div>
+    
+    <button onclick="showGreeting()">Submit</button>
+    
+    <div id="greeting"></div>
 
     <script>
         function showGreeting() {
@@ -72,12 +74,26 @@
             
             if (name) {
                 greetingDiv.textContent = `Hello, ${name}!`;
+                greetingDiv.style.display = 'block';
+                
+                // When you're ready to send to backend, you can use:
+                // sendToBackend(name);
             } else {
                 greetingDiv.textContent = 'Please enter a name.';
+                greetingDiv.style.display = 'block';
             }
         }
         
-        // Allow pressing Enter to submit
+        // Placeholder function for backend integration
+        // function sendToBackend(name) {
+        //     fetch('/api/greeting', {
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         body: JSON.stringify({ name: name })
+        //     });
+        // }
+        
+        // Allow Enter key to submit
         document.getElementById('nameInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 showGreeting();

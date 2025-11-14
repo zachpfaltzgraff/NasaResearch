@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greeting Tool</title>
+    <title>Name Greeting Tool</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,26 +13,36 @@
         }
         
         .container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            background-color: #f9f9f9;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
         }
         
         input[type="text"] {
+            width: 100%;
             padding: 10px;
-            font-size: 16px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
         }
         
         button {
-            padding: 10px 20px;
-            font-size: 16px;
             background-color: #007bff;
             color: white;
+            padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 14px;
         }
         
         button:hover {
@@ -40,36 +50,48 @@
         }
         
         #greeting {
-            font-size: 18px;
-            color: #333;
-            min-height: 30px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+            display: none;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Name Greeting Tool</h1>
-        <input type="text" id="nameInput" placeholder="Enter your name">
-        <button onclick="showGreeting()">Greet Me</button>
+        <h2>Welcome</h2>
+        
+        <form id="nameForm">
+            <label for="nameInput">Enter your name:</label>
+            <input type="text" id="nameInput" name="name" placeholder="Your name" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+        
         <div id="greeting"></div>
     </div>
 
     <script>
-        function showGreeting() {
-            const name = document.getElementById('nameInput').value;
+        document.getElementById('nameForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('nameInput').value.trim();
             const greetingDiv = document.getElementById('greeting');
             
-            if (name.trim() === '') {
-                greetingDiv.textContent = 'Please enter a name!';
-            } else {
+            if (name) {
                 greetingDiv.textContent = `Hello, ${name}!`;
-            }
-        }
-        
-        // Allow pressing Enter to trigger the greeting
-        document.getElementById('nameInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                showGreeting();
+                greetingDiv.style.display = 'block';
+                
+                // TODO: Send to backend
+                // Example using fetch:
+                // fetch('/api/greeting', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ name: name })
+                // });
             }
         });
     </script>

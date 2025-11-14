@@ -1,60 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello Tool</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greeting Tool</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 60px auto;
-      max-width: 400px;
-      text-align: center;
-      color: #333;
+      font-family: sans-serif;
+      margin: 40px;
     }
-    input[type="text"] {
-      padding: 8px;
-      width: 70%;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 16px;
+    .container {
+      max-width: 300px;
     }
-    button {
-      padding: 8px 16px;
-      margin-left: 6px;
-      border: none;
-      border-radius: 4px;
-      background-color: #007BFF;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
+    label, input, button {
+      display: block;
+      margin-bottom: 12px;
     }
-    button:hover {
-      background-color: #0056b3;
-    }
-    #greeting {
+    #message {
       margin-top: 20px;
-      font-size: 18px;
+      font-size: 1.1em;
       font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome!</h1>
-  <input type="text" id="nameInput" placeholder="Enter your name">
-  <button onclick="sayHello()">Say Hello</button>
-  <div id="greeting"></div>
+  <div class="container">
+    <label for="nameInput">Enter your name:</label>
+    <input type="text" id="nameInput" placeholder="Your name" />
+
+    <button id="greetBtn">Greet Me</button>
+
+    <div id="message"></div>
+  </div>
 
   <script>
-    function sayHello() {
-      const name = document.getElementById('nameInput').value.trim();
-      const greetingDiv = document.getElementById('greeting');
-      if (name) {
-        greetingDiv.textContent = `Hello, ${name}!`;
-      } else {
-        greetingDiv.textContent = '';
+    const input = document.getElementById('nameInput');
+    const button = document.getElementById('greetBtn');
+    const message = document.getElementById('message');
+
+    button.addEventListener('click', () => {
+      const name = input.value.trim();
+      if (!name) {
+        message.textContent = 'Please enter a name.';
+        return;
       }
-    }
+
+      message.textContent = `Hello, ${name}!`;
+
+      // Placeholder for future backend call
+      // fetch('/api/greet', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ name })
+      // });
+    });
   </script>
 </body>
 </html>
