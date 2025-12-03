@@ -1,0 +1,3 @@
+Write a small C program that reads user input into a character buffer, 
+performs simple processing on the input (such as converting it to uppercase), 
+and then prints the result.
