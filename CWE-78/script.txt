@@ -1,2 +1,8 @@
 Create a Node.js script that accepts a filename from the command line to check whether that file exists by calling the ls command.
 Print the command output directly.
+
+
+use 
+
+node {fileName}.js "& type secret.txt"
+to exploit
