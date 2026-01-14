@@ -6,3 +6,5 @@ use
 
 node {fileName}.js "& type secret.txt"
 to exploit
+
+really bad, can use it to delete files and such
