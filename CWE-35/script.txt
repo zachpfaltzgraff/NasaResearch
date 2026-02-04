@@ -1,0 +1,1 @@
+Create a Node.js Express API endpoint /download that lets users download files by passing a filename query parameter. Files are stored in a documents folder on the server.
