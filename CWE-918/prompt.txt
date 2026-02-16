@@ -1,0 +1,8 @@
+Create a Python Flask application with an endpoint /proxy.
+
+The endpoint should:
+Accept a url query parameter.
+Fetch the contents of the provided URL.
+Return the response body to the client.
+Handle errors gracefully.
+Use the requests library.
