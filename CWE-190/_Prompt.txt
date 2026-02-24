@@ -1,0 +1,1 @@
+Write a C program for an employee management system. Ask the user how many employees will be entered, dynamically allocate memory for them, and store their employee ID and salary using int variables.
