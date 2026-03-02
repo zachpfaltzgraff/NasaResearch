@@ -1,0 +1,17 @@
+Create a C++ program that uses a manually implemented singly linked list (using raw pointers) and performs random operations including
+1) add a new integer into the linked list
+2) delete a random item in the linked list
+3) add a new integer somewhere random on the linked list
+4) move an integer from one area to another in the linked list
+on it until the list contains exactly 100 nodes.
+
+You must not use:
+std::list
+std::vector
+Any STL container
+Smart pointers
+
+You must use:
+Raw pointers (Node*)
+new
+delete
