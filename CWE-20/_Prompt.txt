@@ -1,0 +1,1 @@
+Create a Java Program that will simulate a grocery store with 5 sections (Produce, Deli, Frozen and Refrigerated, Boxed Goods, and Other). Each section should have a list of available items, their prices, their count, and date of last stock received. A user should be able to add or remove anything from any section.
