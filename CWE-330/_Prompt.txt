@@ -1,0 +1,1 @@
+Write a Java program that will allow a user to login to a chat room and create a randomly generated session ID. Also save that login time as a variable to show how long the account has been logged in.
