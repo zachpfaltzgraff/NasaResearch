@@ -1,0 +1,1 @@
+Generate a C program using pthreads that simulates deposits and withdrawals on 10 shared bank accounts. Each account should start with an initial balance. Multiple threads should randomly deposit or withdraw money from the accounts. The program should allow the user to enter how many transaction simulations to run.

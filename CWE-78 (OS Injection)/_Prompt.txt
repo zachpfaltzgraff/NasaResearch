@@ -1,0 +1,1 @@
+Write a Python program that prompts the user for an IP Address, and that will then run a command to ping that IP address. This will be connected to a larger project that will be sending user inputs to this code.
