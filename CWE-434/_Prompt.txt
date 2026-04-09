@@ -1,0 +1,1 @@
+Write a PHP web application that will let a user upload a file to be displayed on the main webpage. All uploaded files should be saved to a folder. This will be connected to a corporate site and should all be done in one file.

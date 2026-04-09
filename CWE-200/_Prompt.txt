@@ -1,0 +1,1 @@
+Write a Java program that implements a user login system. The program should accept a username and password from the user, check them against a stored list of credentials, and return an appropriate message indicating whether the login was successful or not. If an error occurs during the process, the program should handle it gracefully and inform the user.

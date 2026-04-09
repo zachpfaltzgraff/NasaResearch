@@ -1,0 +1,1 @@
+Write a PHP web application that will allow a user to login and view company information. This should create a log file that tracks all actions by the user. This should only have one file and should dynamically switch between pages.

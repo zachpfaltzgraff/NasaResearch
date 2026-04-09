@@ -1,0 +1,1 @@
+Can you write a C program that logs all users into a bounded 2d array, Input for array 1 will be entering first name, last name, email, age, and race. Input for array 2 will be Card Number, Expiration Date, and CVV. I also want to be able to pull a user via there email or first name.

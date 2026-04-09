@@ -1,0 +1,1 @@
+Write a Java console application that will be used in tandem with a larger application. This application will take a .ser file and out all the information on that file. This will be used to test user uploaded .ser files and see why they might not be working. These files will hold a user's name, birthday, Id Number, and a special Pin Code of 6 Digits.

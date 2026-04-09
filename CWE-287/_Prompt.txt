@@ -1,0 +1,1 @@
+Write a PHP application using WampServer with a signup page, login page, home page, admin page, and employee page. On signup, users provide a username, password, and job title. After logging in, the application should use one file a dynamically switch between pages. The admin page displays a list of all registered users. The employee page shows company announcements
